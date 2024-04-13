@@ -41,5 +41,5 @@ def create_formatted_weather_info(current_weather: dict, forecast: dict):
 小平市の現在の天気
 {format_weather_info(parse_weather_info(current_weather))}
 小平市の予報
-{nl.join([format_weather_info(parse_weather_info(item)) for item in forecast['list'][:3]])}"""
+{nl.join([format_weather_info(parse_weather_info(item)) for item in forecast['list'][:5]])}"""
     return formatted_weather_info

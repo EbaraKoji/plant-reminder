@@ -20,7 +20,7 @@ try:
 
     response = client.chat_postMessage(
         text='リマインダー: 水やり\n' + formatted_weather_info,
-        channel='#times-ebara',
+        channel='#plant',
     )
 
 except BaseException as e:
