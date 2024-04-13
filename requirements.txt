@@ -1,3 +1,4 @@
 python-dotenv==1.0.1
 slack_sdk==3.27.1
 requests==2.31.0
+functions-framework==3.*

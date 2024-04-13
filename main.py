@@ -1,5 +1,6 @@
 import os
 
+import functions_framework
 from dotenv import load_dotenv
 from slack_sdk.web import WebClient
 
@@ -7,7 +8,8 @@ from src.weather import fetch_weather_info
 from src.format_weather import create_formatted_weather_info
 
 
-def remind_watering():
+@functions_framework.cloud_event
+def remind_watering(cloud_event):
     load_dotenv()
 
     city_name = 'Kodaira'
@@ -29,7 +31,3 @@ def remind_watering():
             text=f"Failed to log reminder. \nError: {e}",
             channel='#times-ebara',
         )
-
-
-if __name__ == '__main__':
-    remind_watering()
