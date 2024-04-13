@@ -6,6 +6,7 @@ services:
     build: .
     volumes:
       - ./src:/app/src
+      - ./main.py:/app/main.py
       - ./.env:/app/.env
       - ./data:/app/data
-    command: 'python src/main.py'
+    command: 'python main.py'
