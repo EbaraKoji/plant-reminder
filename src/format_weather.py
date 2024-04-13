@@ -1,14 +1,6 @@
-import os
 from dataclasses import dataclass
 from datetime import datetime
 from zoneinfo import ZoneInfo
-
-from dotenv import load_dotenv
-from slack_sdk.web import WebClient
-
-from weather import fetch_weather_info
-
-load_dotenv()
 
 weather_icons = {
     'Clear': ':sunny:',
@@ -43,30 +35,11 @@ def format_weather_info(weather_info: WeatherInfo):
         f"湿度:{weather_info.humidity}%"
 
 
-# with open('data/current_weather.json', 'r') as f:
-#     current_weather = json.loads(f.read())
-
-# with open('data/forecast.json', 'r') as f:
-#     forecast = json.loads(f.read())
-
-current_weather = fetch_weather_info(city_name='Kodaira', type='weather')
-assert int(current_weather['cod']) == 200
-forecast = fetch_weather_info(city_name='Kodaira', type='forecast')
-assert int(forecast['cod']) == 200   # XXX: weatherでは数値だが、forecastでは文字列型で返ってくる!
-
-nl = '\n'
-formatted_weather_info = f"""
+def create_formatted_weather_info(current_weather: dict, forecast: dict):
+    nl = '\n'
+    formatted_weather_info = f"""
 小平市の現在の天気
 {format_weather_info(parse_weather_info(current_weather))}
 小平市の予報
-{nl.join([format_weather_info(parse_weather_info(item)) for item in forecast['list'][:3]])}
-"""
-
-# print(formatted_weather_info)
-
-client = WebClient(token=os.environ['SLACK_API_TOKEN'])
-response = client.chat_postMessage(
-    text=formatted_weather_info,
-    channel='#times-ebara',
-)
-print(response)
+{nl.join([format_weather_info(parse_weather_info(item)) for item in forecast['list'][:3]])}"""
+    return formatted_weather_info
