@@ -1,0 +1,25 @@
+{
+  "name": "plant-reminder",
+  "image": "ebarakoji/plant-reminder:v1.0",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "files.autoSave": "afterDelay",
+        "files.autoSaveDelay": 1000,
+        "python.formatting.enableOnSave": true,
+        "python.defaultInterpreterPath": "/Users/ebarakoji/miniforge3/bin/python",
+        "editor.defaultFormatter": "eeyore.yapf",
+        "yapf.args": ["--style", "{column_limit: 120}"],
+        "notebook.formatOnSave.enabled": true
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.isort",
+        "eeyore.yapf",
+        "flake8.flake8",
+        "ms-toolsai.jupyter"
+      ]
+    }
+  }
+}
