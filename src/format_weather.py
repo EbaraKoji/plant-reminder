@@ -7,6 +7,7 @@ weather_icons = {
     'Clouds': ':cloud:',
     'Rain': ':rain_cloud:',
     'Snow': ':snowman:',
+    'Drizzle': ':closed_umbrella:',
 }
 
 
