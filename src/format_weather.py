@@ -8,6 +8,7 @@ weather_icons = {
     'Rain': ':rain_cloud:',
     'Snow': ':snowman:',
     'Drizzle': ':closed_umbrella:',
+    'Mist': ':face_in_clouds:',
 }
 
 
@@ -24,16 +25,21 @@ def parse_weather_info(item: dict, current=False):
         time = datetime.now(tz=ZoneInfo('Asia/Tokyo'))
     else:
         time = datetime.fromtimestamp(item['dt'], tz=ZoneInfo('Asia/Tokyo'))
-    weather_icon = weather_icons[item['weather'][0]['main']]
+    weather_icon_key = item['weather'][0]['main']
+    weather_icon = weather_icons.get(weather_icon_key, weather_icon_key)
     temp = round(item['main']['temp'], 1)
     humidity = item['main']['humidity']
-    return WeatherInfo(time=time, weather_icon=weather_icon, temp=temp, humidity=humidity)
+    return WeatherInfo(
+        time=time, weather_icon=weather_icon, temp=temp, humidity=humidity
+    )
 
 
 def format_weather_info(weather_info: WeatherInfo):
-    return f"{weather_info.time.strftime('%m/%d %H:%M')}  " \
-        f"{weather_info.weather_icon}  {weather_info.temp}°C  " \
+    return (
+        f"{weather_info.time.strftime('%m/%d %H:%M')}  "
+        f"{weather_info.weather_icon}  {weather_info.temp}°C  "
         f"湿度:{weather_info.humidity}%"
+    )
 
 
 def create_formatted_weather_info(current_weather: dict, forecast: dict):
