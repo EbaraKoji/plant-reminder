@@ -1,4 +1,5 @@
 import os
+import traceback
 
 import functions_framework
 from dotenv import load_dotenv
@@ -44,6 +45,7 @@ def remind_watering(cloud_event):
         )
 
     except BaseException as e:
+        traceback.print_exc()
         client.chat_postMessage(
             text=f"Failed to log reminder. \nError: {e}",
             channel=debug_channel,
